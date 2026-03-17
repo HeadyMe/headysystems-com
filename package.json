@@ -2,10 +2,21 @@
   "name": "heady-headysystems-com",
   "version": "1.0.0",
   "private": true,
+  "description": "HeadySystems — Enterprise AI platform — intelligent infrastructure for modern organizations",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "author": "Heady Systems",
+  "license": "UNLICENSED",
+  "homepage": "https://headysystems.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeadyMe/headysystems-com.git"
   }
 }

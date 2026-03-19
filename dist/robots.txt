@@ -1,0 +1,22 @@
+# robots.txt — headysystems.com
+# © 2026 HeadySystems Inc.
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /health
+
+# Sitemap
+Sitemap: https://headysystems.com/sitemap.xml
+
+# AI Training Opt-Out
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Google-Extended
+Disallow: /

@@ -3,9 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HeadySystems — The Architecture of Intelligence</title>
-  <meta name="description" content="HeadySystems is the operational backbone — HeadyConductor federated routing, HCFP auto-success remediation, 20-node orchestration, and real-time drift detection across 7 production domains.">
+  <title>HeadySystems — The Architecture of Intelligence | AI Infrastructure</title>
+  <meta name="description" content="HeadySystems: The operational backbone of the Heady AI ecosystem — 20-node orchestration, federated routing, HCFP auto-success, real-time drift detection, φ-scaled performance.">
   <meta name="theme-color" content="#059669">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://headysystems.com/">
+  <meta property="og:title" content="HeadySystems — The Architecture of Intelligence">
+  <meta property="og:description" content="Enterprise AI infrastructure — 20-node orchestration, federated routing, PQC security (ML-DSA-65), 22-stage HCFP pipeline, and self-healing kernel.">
+  <meta property="og:image" content="https://headysystems.com/og-image.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HeadySystems — AI Infrastructure Engine">
+  <meta name="twitter:description" content="20-node AI orchestration, HCFP auto-success, PQC security. The backbone that powers the entire Heady ecosystem.">
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"HeadySystems Inc.","url":"https://headysystems.com","description":"The operational backbone of the Heady AI ecosystem — 20-node orchestration, HCFP auto-success, and enterprise-grade AI infrastructure.","founder":{"@type":"Person","name":"Eric Haywood"},"sameAs":["https://headyme.com","https://headyconnection.org","https://headybuddy.org"]}
+  </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,8 +79,49 @@
     .f-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; color: #fff; }
     .f-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
 
-    /* ── Footer ── */
-    footer { padding: 60px 0; text-align: center; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 1px; }
+    /* ── Stats ── */
+    .stats-bar { padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+    @media(max-width:640px){ .stats-grid { grid-template-columns: repeat(2,1fr); gap: 24px; } }
+    .stat-num { font-size: clamp(2rem,5vw,3.5rem); font-weight: 800; color: var(--accent); letter-spacing: -0.03em; text-shadow: 0 0 20px rgba(52,211,153,0.4); display: block; }
+    .stat-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 4px; display: block; }
+
+    /* ── Architecture Stack ── */
+    .arch-stack { padding: 80px 0; }
+    .arch-layers { display: flex; flex-direction: column; gap: 12px; max-width: 800px; margin: 0 auto; }
+    .arch-layer { display: flex; align-items: stretch; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .arch-layer-label { background: rgba(52,211,153,0.08); border-right: 2px solid rgba(52,211,153,0.2); padding: 20px 24px; min-width: 120px; display: flex; flex-direction: column; justify-content: center; }
+    .arch-layer-num { font-size: 0.6rem; color: var(--accent); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .arch-layer-name { font-size: 0.9rem; font-weight: 700; color: #fff; margin-top: 4px; }
+    .arch-layer-body { padding: 20px 24px; background: var(--surface); flex: 1; }
+    .arch-layer-title { font-size: 0.85rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .arch-layer-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── Code Block ── */
+    .code-section { padding: 60px 0; }
+    .code-block { background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 16px; padding: 32px; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.8rem; line-height: 1.8; color: #e2e8f0; overflow-x: auto; position: relative; }
+    .code-block .kw { color: var(--accent); font-weight: 600; }
+    .code-block .fn { color: #93c5fd; }
+    .code-block .cm { color: rgba(255,255,255,0.3); font-style: italic; }
+    .code-block .nm { color: #fde68a; }
+    .code-copy { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.08); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 0.7rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+    .code-copy:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    /* ── Footer Enhanced ── */
+    footer { padding: 60px 0 40px; border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+    @media(max-width:768px){ .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:480px){ .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand .footer-logo { font-size: 1.2rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+    .footer-brand p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.8; max-width: 260px; }
+    .footer-col h4 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.8rem; color: var(--text-muted); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.08em; }
+
+    /* ── Scroll Reveal ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── Chat Widget ── */
     .buddy-fab { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--g1), var(--g2)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 30px var(--accent)33; transition: all 0.3s; }
@@ -169,12 +224,12 @@
   <div class="site-wrap">
     <div class="container">
       <header>
-        <a class="logo-wrap" href="#">
+        <a class="logo-wrap" href="https://headysystems.com">
           <div class="logo-title">HeadySystems</div>
           <div class="logo-sub">Self-healing infrastructure</div>
         </a>
         <nav>
-          <a href="#" class="active">Ecosystem</a>
+          <a href="https://headysystems.com" class="active">Ecosystem</a>
           <a href="https://headyio.com">Developers</a>
           <a href="https://headymcp.com">Marketplace</a>
           <a href="https://headyio.com/downloads.html" style="color: var(--accent); font-weight: 700;">Downloads</a>
@@ -228,6 +283,61 @@
       </section>
       
 
+      <!-- Stats Bar -->
+      <section class="stats-bar reveal">
+        <div class="stats-grid">
+          <div><span class="stat-num" data-target="51">0</span><span class="stat-lbl">Provisional Patents</span></div>
+          <div><span class="stat-num" data-target="17">0</span><span class="stat-lbl">AI Swarms</span></div>
+          <div><span class="stat-num" data-target="12">0</span><span class="stat-lbl">Pipeline Stages</span></div>
+          <div><span class="stat-num" data-target="3">0</span><span class="stat-lbl">Memory Tiers</span></div>
+        </div>
+      </section>
+
+      <!-- Architecture Stack -->
+      <section class="arch-stack reveal">
+        <div class="section-heading" style="text-align:center;margin-bottom:48px;">
+          <h2 style="font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:#fff;margin-bottom:12px;">The 6-Layer Stack</h2>
+          <p style="color:var(--text-muted);max-width:500px;margin:0 auto;">From edge to intelligence in milliseconds. Every layer patent-protected.</p>
+        </div>
+        <div class="arch-layers">
+          <div class="arch-layer"><div class="arch-layer-label"><div class="arch-layer-num">L6</div><div class="arch-layer-name">EDGE</div></div><div class="arch-layer-body"><div class="arch-layer-title">Cloudflare Workers / Pages</div><div class="arch-layer-desc">TLS termination, WAF, geo-routing, DDoS protection, edge caching. Every request handled at 300+ global PoPs before touching compute.</div></div></div>
+          <div class="arch-layer"><div class="arch-layer-label"><div class="arch-layer-num">L5</div><div class="arch-layer-name">GATEWAY</div></div><div class="arch-layer-body"><div class="arch-layer-title">CSL Gates + Express Middleware</div><div class="arch-layer-desc">JWT + httpOnly cookie auth, φ-scaled rate limiting (Fibonacci: 55/144/233), CORS, request normalization, session binding.</div></div></div>
+          <div class="arch-layer"><div class="arch-layer-label"><div class="arch-layer-num">L4</div><div class="arch-layer-name">ORCHESTRATION</div></div><div class="arch-layer-body"><div class="arch-layer-title">17-Swarm Matrix + BeeFactory</div><div class="arch-layer-desc">Task decomposition → swarm selection → parallel dispatch → consensus merge. SkillRouter maps intent to specialist swarms.</div></div></div>
+          <div class="arch-layer"><div class="arch-layer-label"><div class="arch-layer-num">L3</div><div class="arch-layer-name">INTELLIGENCE</div></div><div class="arch-layer-body"><div class="arch-layer-title">Model Council + CSL Scoring</div><div class="arch-layer-desc">Multi-model inference with CSL consensus scoring. NLP, embeddings, vector search, knowledge graphs. The brain of Heady.</div></div></div>
+          <div class="arch-layer"><div class="arch-layer-label"><div class="arch-layer-num">L2</div><div class="arch-layer-name">MEMORY</div></div><div class="arch-layer-body"><div class="arch-layer-title">3-Tier: Redis / pgvector / Archival</div><div class="arch-layer-desc">Hot (Redis) → session state, counters. Warm (pgvector) → embeddings, vector search. Cold → audit logs, training data.</div></div></div>
+          <div class="arch-layer"><div class="arch-layer-label"><div class="arch-layer-num">L1</div><div class="arch-layer-name">RESILIENCE</div></div><div class="arch-layer-body"><div class="arch-layer-title">HealthAttestor + Circuit Breakers</div><div class="arch-layer-desc">φ-backoff circuit breakers. Auto-remediation on failure. Graceful degradation. CSL-scored health broadcasting to all services.</div></div></div>
+        </div>
+      </section>
+
+      <!-- Code Section -->
+      <section class="code-section reveal">
+        <div class="section-heading" style="text-align:center;margin-bottom:40px;">
+          <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:12px;">CSL in Action</h2>
+          <p style="color:var(--text-muted);">Real Continuous Semantic Logic gate code — not pseudocode.</p>
+        </div>
+        <div class="code-block">
+          <button class="code-copy" onclick="navigator.clipboard.writeText(this.parentElement.innerText.replace('Copy','').trim())">Copy</button>
+          <span class="cm">// Continuous Semantic Logic — φ-derived thresholds</span><br>
+          <span class="kw">const</span> <span class="nm">PHI</span> = <span class="nm">1.618033988749895</span>;<br>
+          <span class="kw">const</span> <span class="nm">PSI</span> = <span class="nm">1</span> / PHI; <span class="cm">// 0.618...</span><br>
+          <span class="kw">const</span> <span class="nm">CSL_THRESHOLDS</span> = {<br>
+          &nbsp;&nbsp;LOW: PSI * <span class="nm">0.5</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">// 0.309 — minimum viable signal</span><br>
+          &nbsp;&nbsp;MEDIUM: PSI,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">// 0.618 — resonant alignment</span><br>
+          &nbsp;&nbsp;HIGH: PHI * <span class="nm">0.5</span>,&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">// 0.809 — high confidence</span><br>
+          &nbsp;&nbsp;CRITICAL: PSI + <span class="nm">0.3</span>,<span class="cm">// 0.918 — near-certain</span><br>
+          };<br><br>
+          <span class="kw">function</span> <span class="fn">cslGate</span>(score, threshold = CSL_THRESHOLDS.MEDIUM, weight = <span class="nm">1.0</span>) {<br>
+          &nbsp;&nbsp;<span class="kw">const</span> weighted = score * weight;<br>
+          &nbsp;&nbsp;<span class="kw">return</span> { pass: weighted >= threshold, score: weighted, delta: weighted - threshold };<br>
+          }<br><br>
+          <span class="kw">function</span> <span class="fn">cslConsensus</span>(modelOutputs) {<br>
+          &nbsp;&nbsp;<span class="kw">const</span> scores = modelOutputs.map(o => o.confidence * o.relevance);<br>
+          &nbsp;&nbsp;<span class="kw">const</span> mean = scores.reduce((a, b) => a + b, <span class="nm">0</span>) / scores.length;<br>
+          &nbsp;&nbsp;<span class="kw">return</span> cslGate(mean, CSL_THRESHOLDS.HIGH);<br>
+          }
+        </div>
+      </section>
+
       <!-- UX Controls -->
       <div class="ux-controls">
         <div class="control-panel">
@@ -265,17 +375,40 @@
       </section>
 
       <footer>
-        <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:16px;">
-          <a href="https://headysystems.com" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadySystems</a>
-          <a href="https://headyme.com" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyMe</a>
-          <a href="https://headyio.com" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyIO</a>
-          <a href="https://headyapi.com" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyAPI</a>
-          <a href="https://headymcp.com" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyMCP</a>
-          <a href="https://headyos.com" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyOS</a>
-          <a href="https://headyconnection.org" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyConnection</a>
-          <a href="https://headybuddy.org" style="color:var(--text-muted);text-decoration:none;font-size:0.7rem;">HeadyBuddy</a>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">HeadySystems™</div>
+            <p>The architecture engine powering the entire Heady AI ecosystem. 6-layer stack. 51 patents. φ-scaled from edge to intelligence.</p>
+            <p style="margin-top:12px;font-size:0.75rem;color:rgba(255,255,255,0.3);">© 2026 HeadySystems Inc.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Architecture</h4>
+            <a href="https://headysystems.com">Overview</a>
+            <a href="https://headysystems.com/patents">Patents (51+)</a>
+            <a href="https://headydocs.com">Documentation</a>
+            <a href="https://headyapi.com">API Reference</a>
+          </div>
+          <div class="footer-col">
+            <h4>Ecosystem</h4>
+            <a href="https://headyme.com">HeadyMe</a>
+            <a href="https://headyconnection.org">HeadyConnection</a>
+            <a href="https://headybuddy.org">HeadyBuddy</a>
+            <a href="https://headyos.com">HeadyOS</a>
+            <a href="https://heady-ai.com">Heady AI</a>
+          </div>
+          <div class="footer-col">
+            <h4>Developers</h4>
+            <a href="https://headyio.com">HeadyIO</a>
+            <a href="https://headyapi.com">HeadyAPI</a>
+            <a href="https://headymcp.com">HeadyMCP</a>
+            <a href="https://headyio.com/downloads.html">SDK Downloads</a>
+            <a href="mailto:hello@headysystems.com">Contact</a>
+          </div>
         </div>
-        © 2026 HeadySystems — ∞ SACRED GEOMETRY ∞ — Powered by HCFP Auto-Success
+        <div class="footer-bottom">
+          <span>© 2026 HeadySystems Inc. — Eric Haywood — 51 Provisional Patents — All Rights Reserved</span>
+          <span>∞ φ-Scaled. Fibonacci-Tuned. Mathematically Inevitable. ∞</span>
+        </div>
       </footer>
     </div>
   </div>
@@ -976,6 +1109,28 @@
      setInterval(loadTasks, 10000); // Refresh every 10 seconds
      }
   })();
+  </script>
+  <script>
+  function animateCounter(el, target, duration) {
+    const start = performance.now();
+    const update = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(e * target) + (target > 10 ? '+' : '');
+      if (p < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('[data-target]').forEach(el => animateCounter(el, parseInt(el.dataset.target, 10), 1600));
+        ro.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
   </script>
 </body>
 </html>

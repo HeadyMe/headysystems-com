@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://headysystems.com/#org",
+  "name": "HeadySystems Inc.",
+  "url": "https://headysystems.com",
+  "logo": "https://headysystems.com/logo.png",
+  "description": "The World's First Sovereign AI Operating System — φ-scaled, swarm-intelligent, CSL-gated.",
+  "foundingDate": "2026",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Fort Collins",
+    "addressRegion": "CO",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://github.com/HeadyMe",
+    "https://headyme.com",
+    "https://headymcp.com",
+    "https://headyconnection.org"
+  ]
+}

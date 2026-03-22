@@ -7,6 +7,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
+const crypto = require('crypto');
 
 const PORT = process.env.PORT || 8080;
 const API_TARGET = process.env.API_TARGET || 'https://manager.headysystems.com';
@@ -44,9 +45,10 @@ const COMPRESSIBLE = new Set([
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'SAMEORIGIN',
-  'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://manager.headysystems.com https://*.headysystems.com https://*.headyme.com; manifest-src 'self'; frame-ancestors 'self'",
 };
 
 function getCacheControl(ext) {
@@ -108,9 +110,19 @@ function serveStatic(req, res) {
         res.end('Not Found');
         return;
       }
+
+      // ETag: conditional caching — return 304 if content unchanged
+      const etag = '"' + crypto.createHash('md5').update(data).digest('hex') + '"';
+      if (req.headers['if-none-match'] === etag) {
+        res.writeHead(304, SECURITY_HEADERS);
+        res.end();
+        return;
+      }
+
       const headers = {
         'Content-Type': contentType,
         'Cache-Control': getCacheControl(ext),
+        'ETag': etag,
         ...SECURITY_HEADERS,
       };
       compressAndSend(req, res, 200, headers, data);
@@ -132,9 +144,12 @@ function proxyToApi(req, res) {
   };
 
   const proxyReq = client.request(proxyOpts, (proxyRes) => {
+    const origin = req.headers.origin || '';
+    const allowedOrigins = /^https?:\/\/(.*\.)?(headysystems\.com|headyme\.com|headyio\.com|headymcp\.com|headyos\.com|headybuddy\.org|headyconnection\.org|localhost:\d+)$/;
+    const corsOrigin = allowedOrigins.test(origin) ? origin : 'https://headysystems.com';
     const headers = {
       ...proxyRes.headers,
-      'access-control-allow-origin': '*',
+      'access-control-allow-origin': corsOrigin,
       'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'access-control-allow-headers': 'Content-Type, Authorization, X-Heady-API-Key',
     };
@@ -160,8 +175,11 @@ function proxyToApi(req, res) {
 const server = http.createServer((req, res) => {
   // CORS preflight
   if (req.method === 'OPTIONS') {
+    const origin = req.headers.origin || '';
+    const allowedOrigins = /^https?:\/\/(.*\.)?(headysystems\.com|headyme\.com|headyio\.com|headymcp\.com|headyos\.com|headybuddy\.org|headyconnection\.org|localhost:\d+)$/;
+    const corsOrigin = allowedOrigins.test(origin) ? origin : 'https://headysystems.com';
     res.writeHead(204, {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Heady-API-Key',
       'Access-Control-Max-Age': '86400',

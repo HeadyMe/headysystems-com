@@ -1,0 +1,26 @@
+# HeadySystems Inc.
+
+> The World's First Sovereign AI Operating System — φ-scaled swarm intelligence with Continuous Semantic Logic (CSL), 17 Swarm Matrix, and 89 specialized bee types.
+
+HeadySystems Inc. is a Colorado C-Corp (EIN 41-3412204) building Heady™, an autonomous AI orchestration platform. Sister nonprofit: HeadyConnection Inc. (EIN 41-3508351, 501(c)(3) pending).
+
+## Core Technology
+- [Heady™ Latent-Space OS Architecture](/docs/architecture.md): 5-layer orchestration, 22-stage HCFP pipeline, sacred geometry φ-scaled routing.
+- [Continuous Semantic Logic (CSL)](/docs/csl.md): Cosine similarity gates replacing if/else boolean logic. 0.0–1.0 continuous scoring across 1536-dimensional vector space.
+- [17 Swarm Matrix](/docs/swarms.md): 89 bee types across 17 swarms. Specialized AI sub-agents with emergent orchestration.
+- [HeadyMCP](/docs/mcp.md): 31 MCP tools via Model Context Protocol. Live at headymcp.com.
+
+## Products
+- [HeadyBuddy](/products/headybuddy): Personal AI companion with persistent cross-domain memory.
+- [HeadyBot](/products/headybot): Autonomous bot framework for business process automation.
+- [HeadyAPI](/products/api): REST + GraphQL API with usage-based metering.
+
+## Legal & IP
+- 60+ provisional patents covering AI orchestration, swarm intelligence, PQC, and spatial computing.
+- Patent portfolio valued $4.2M–$12.8M.
+
+## Links
+- [GitHub](https://github.com/HeadyMe)
+- [HeadyMCP Dashboard](https://headymcp.com)
+- [API Documentation](https://headyapi.com)
+- [HeadyConnection Nonprofit](https://headyconnection.org)

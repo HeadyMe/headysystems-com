@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The compliance-ready, patent-protected platform for autonomous agent deployment at scale. SOC2, HIPAA, GDPR ready. 51+ patents. Founded by Eric Haywood.">
+<meta property="og:title" content="HeadySystems — Enterprise AI Orchestration">
+<meta property="og:description" content="The compliance-ready, patent-protected platform for autonomous agent deployment at scale. SOC2, HIPAA, GDPR ready. 51+ patents. Founded by Eric Haywood.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://headysystems.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HeadySystems">
+<meta name="twitter:description" content="Enterprise AI Orchestration">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "HeadySystems",
+  "url": "https://headysystems.com",
+  "description": "The compliance-ready, patent-protected platform for autonomous agent deployment at scale. SOC2, HIPAA, GDPR ready. 51+ patents. Founded by Eric Haywood.",
+  "creator": {"@type": "SoftwareApplication", "name": "Perplexity Computer", "url": "https://www.perplexity.ai/computer"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Heady Systems",
+  "url": "https://headysystems.com",
+  "description": "AI-powered cognitive orchestration platform",
+  "founder": {"@type": "Person", "name": "Eric Haywood"},
+  "sameAs": ["https://github.com/HeadyAI"]
+}
+</script>
+<link rel="canonical" href="https://headysystems.com/">
+<title>HeadySystems — Enterprise AI Orchestration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared/css/heady-base.css">
+<style>
+  :root {
+    --color-accent: #00d4aa;
+    --color-accent-dark: #00b891;
+    --color-accent-glow: rgba(0,212,170,0.15);
+    --color-accent-muted: rgba(0,212,170,0.08);
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,212,170,0.15), transparent),
+      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(139,92,246,0.04), transparent);
+  }
+  .hero-grid { display:grid; gap:var(--space-8); align-items:start; }
+  .hero-grid-auth { grid-template-columns:minmax(0,1.2fr) minmax(320px,0.8fr); }
+  .hero-context-strip { margin-top:var(--space-6); padding:var(--space-4); border:1px solid var(--glass-border); border-radius:var(--radius-xl); background:var(--glass-bg); }
+  .prose-block p { max-width:none; margin-bottom:var(--space-5); }
+  .process-map { display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; justify-content:center; margin-bottom:var(--space-8); padding:var(--space-5); border:1px solid var(--glass-border); border-radius:var(--radius-2xl); background:var(--glass-bg); }
+  .process-node { min-width:150px; padding:var(--space-4); border:1px solid var(--color-border); border-radius:var(--radius-xl); background:rgba(255,255,255,0.03); text-align:center; }
+  .process-node span { display:block; font-size:var(--text-xs); color:var(--color-text-faint); margin-bottom:var(--space-2); }
+  .process-arrow { color:var(--color-accent); font-size:var(--text-lg); }
+  .tech-diagram { display:grid; gap:var(--space-5); margin-bottom:var(--space-6); }
+  .stack-row { display:grid; gap:var(--space-3); padding:var(--space-4); border:1px solid var(--glass-border); border-radius:var(--radius-2xl); background:var(--glass-bg); }
+  .stack-label { font-size:var(--text-sm); text-transform:uppercase; letter-spacing:0.08em; color:var(--color-text-faint); max-width:none; }
+  .stack-row-grid { display:grid; gap:var(--space-3); grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+  .stack-node { padding:var(--space-3) var(--space-4); border-radius:var(--radius-lg); background:rgba(255,255,255,0.04); border:1px solid var(--color-border); font-size:var(--text-sm); }
+  .identity-console { padding:var(--space-6); border-radius:var(--radius-2xl); border:1px solid var(--glass-border); background:var(--glass-bg); backdrop-filter:blur(18px); box-shadow:var(--shadow-lg); }
+  .identity-console-title { font-size:var(--text-xl); margin-bottom:var(--space-3); }
+  .identity-console-copy { margin-bottom:var(--space-5); color:var(--color-text-muted); max-width:none; }
+  .identity-form { display:grid; gap:var(--space-4); }
+  .identity-form label { display:grid; gap:var(--space-2); }
+  .identity-form input { width:100%; padding:var(--space-3) var(--space-4); border-radius:var(--radius-lg); border:1px solid var(--color-border); background:rgba(255,255,255,0.04); color:var(--color-text); }
+  .identity-actions { display:flex; gap:var(--space-3); flex-wrap:wrap; }
+  .identity-note { font-size:var(--text-sm); color:var(--color-text-faint); max-width:none; }
+  @media (max-width: 900px) {
+    .hero-grid-auth { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="heady-nav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="HeadySystems home">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+      <circle cx="16" cy="16" r="8" stroke="var(--color-accent)" stroke-width="1.5"/>
+      <circle cx="16" cy="16" r="3" fill="var(--color-accent)"/>
+      <path d="M16 8 L16 2 M16 24 L16 30 M8 16 L2 16 M24 16 L30 16" stroke="var(--color-accent)" stroke-width="1" opacity="0.6"/>
+    </svg>
+    <span>Heady<span class="logo-accent">Systems</span></span>
+  </a>
+  <ul class="nav-links" role="list"><li><a href="#value" class="">Platform</a></li><li><a href="#roi" class="">ROI Calculator</a></li><li><a href="#security" class="">Security</a></li><li><a href="#cases" class="">Case Studies</a></li><li><a href="#contact" class="cta">Contact Sales</a></li></ul>
+  <div class="nav-actions">
+    <button class="nav-theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle light or dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="nav-hamburger" aria-expanded="false" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<main id="main-content">
+  <section class="heady-hero" aria-label="Hero">
+  <canvas class="hero-canvas" data-sacred-geometry="metatrons-cube" data-accent="#00d4aa" aria-hidden="true"></canvas>
+  <div class="hero-content hero-grid">
+    <div>
+      <div class="hero-badge fade-in"><span class="hero-badge-dot" aria-hidden="true"></span>Infrastructure</div>
+      <h1 class="hero-title fade-in fade-in-delay-1">Enterprise AI<br><span class="accent-gold">Orchestration</span></h1>
+      <p class="hero-subtitle fade-in fade-in-delay-2">The compliance-ready, patent-protected platform for autonomous agent deployment at scale.</p>
+      <div class="hero-actions fade-in fade-in-delay-3">
+        <a href="#features" class="btn btn-primary btn-lg">Explore the system</a>
+        <a href="#deep-dive" class="btn btn-ghost btn-lg">Read the full brief</a>
+      </div>
+      <div class="hero-stats fade-in fade-in-delay-4"><div class="hero-stat">
+      <span class="hero-stat-value" data-count="150" data-prefix="" data-suffix="+">150+</span>
+      <span class="hero-stat-label">Supervisors</span>
+    </div><div class="hero-stat">
+      <span class="hero-stat-value" data-count="9" data-prefix="" data-suffix="">9</span>
+      <span class="hero-stat-label">Domains</span>
+    </div><div class="hero-stat">
+      <span class="hero-stat-value" data-count="99.9" data-prefix="" data-suffix="%">99.9%</span>
+      <span class="hero-stat-label">Uptime Target</span>
+    </div><div class="hero-stat">
+      <span class="hero-stat-value" data-count="51" data-prefix="" data-suffix="+">51+</span>
+      <span class="hero-stat-label">Patents</span>
+    </div></div>
+      <div class="hero-context-strip fade-in fade-in-delay-4" data-heady-bee="hero-context" data-heady-bee-content="<strong>AutoContext active.</strong> This page registers its domain, site role, and session hooks the moment the runtime loads.">
+        <strong>AutoContext active.</strong> This page registers its domain, site role, and session hooks the moment the runtime loads.
+      </div>
+    </div>
+    
+  </div>
+</section>
+  <section id="features" class="section" aria-labelledby="features-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Capabilities</p>
+      <h2 id="features-heading" class="section-title">What this site carries</h2>
+      <p class="section-subtitle">Every card below maps visible interface behavior to the system patterns running across the full Heady estate.</p>
+    </header>
+    <div class="grid-4 grid-auto"><div class="feature-card fade-in fade-in-delay-1">
+      <span class="feature-icon" aria-hidden="true">🛡️</span>
+      <h3 class="feature-title">Self-Healing Infrastructure</h3>
+      <p class="feature-desc">Auto-heal resilience loops, circuit breakers, and autonomous error recovery across all services.</p>
+    </div><div class="feature-card fade-in fade-in-delay-2">
+      <span class="feature-icon" aria-hidden="true">🎼</span>
+      <h3 class="feature-title">Buddy Orchestrator</h3>
+      <p class="feature-desc">Multi-agent orchestration via Sacred Geometry — 150+ supervisors coordinating 20 AI nodes.</p>
+    </div><div class="feature-card fade-in fade-in-delay-3">
+      <span class="feature-icon" aria-hidden="true">📊</span>
+      <h3 class="feature-title">Live Telemetry</h3>
+      <p class="feature-desc">Structured logging, health probes, race audits, and real-time performance dashboards.</p>
+    </div><div class="feature-card fade-in fade-in-delay-4">
+      <span class="feature-icon" aria-hidden="true">⚡</span>
+      <h3 class="feature-title">HCFP Auto-Success</h3>
+      <p class="feature-desc">Continuous deployment with security scanning, SBOM generation, smoke tests, and auto-verification.</p>
+    </div><div class="feature-card fade-in fade-in-delay-4">
+      <span class="feature-icon" aria-hidden="true">🔐</span>
+      <h3 class="feature-title">Zero Trust Security</h3>
+      <p class="feature-desc">mTLS client certs, secret rotation, Cloudflare WARP enforcement, and TruffleHog scanning.</p>
+    </div><div class="feature-card fade-in fade-in-delay-4">
+      <span class="feature-icon" aria-hidden="true">🌐</span>
+      <h3 class="feature-title">Edge Mesh Network</h3>
+      <p class="feature-desc">Cloudflare Workers edge proxy with KV caching, sub-50ms latency, and deterministic routing.</p>
+    </div></div>
+  </div>
+</section>
+  <section id="stats" class="section-sm" aria-labelledby="stats-heading">
+  <div class="container">
+    <header class="section-header fade-in" style="margin-bottom:var(--space-6)">
+      <p class="section-label" aria-hidden="true">Signals</p>
+      <h2 id="stats-heading" class="section-title">Animated system markers</h2>
+    </header>
+    <div class="stats-strip grid-4" role="region" aria-label="Key metrics"><div class="fade-in">
+      <div class="stat-value" data-count="150" data-prefix="" data-suffix="+">150+</div>
+      <div class="stat-label">Supervisors</div>
+    </div><div class="fade-in">
+      <div class="stat-value" data-count="9" data-prefix="" data-suffix="">9</div>
+      <div class="stat-label">Domains</div>
+    </div><div class="fade-in">
+      <div class="stat-value" data-count="99.9" data-prefix="" data-suffix="%">99.9%</div>
+      <div class="stat-label">Uptime Target</div>
+    </div><div class="fade-in">
+      <div class="stat-value" data-count="51" data-prefix="" data-suffix="+">51+</div>
+      <div class="stat-label">Patents</div>
+    </div></div>
+  </div>
+</section>
+  <section id="deep-dive" class="section" aria-labelledby="deep-dive-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Deep Dive</p>
+      <h2 id="deep-dive-heading" class="section-title">The full system brief</h2>
+      <p class="section-subtitle">Long-form explanation of how this property connects identity, context, delivery, and ecosystem navigation.</p>
+    </header>
+    <div class="deep-dive">
+      <article class="deep-dive-content prose-block" data-heady-bee="deep-dive"><p class="fade-in">HeadySystems exists for teams deploying production AI systems across regulated, revenue-linked, and multi-team environments. The page is not a decorative brochure. It is a system brief that explains how enterprise ai orchestration becomes a working surface connected to the rest of Heady. Every visible section, every CTA, every navigation path, and every session-aware interaction is built around one idea: deliver a sovereign platform layer for autonomous software without forcing teams to stitch identity, observability, routing, and memory together by hand. That is why the site pairs long-form explanation with a shared runtime, a sacred geometry canvas, and a central auth path. Visitors are not asked to imagine how the platform fits together. They can see the connection between the public story, the runtime layer, the auth layer, and the delivery layer in one place.</p><p class="fade-in">The design language leans on Metatrons Cube because the Heady estate treats visual identity as a sign of system continuity. Each site gets its own canvas motion, yet the motion is not isolated ornament. It is paired with the same glass surfaces, the same phi-scaled spacing, the same navigation frame, and the same context bridge so that a person moving from HeadySystems to another Heady surface keeps orientation. That continuity matters for trust. A system that claims to orchestrate many domains should feel connected at the interaction level, at the code level, and at the message level. This page is written to make that contract plain rather than implied.</p><p class="fade-in">Identity is handled through auth.headysystems.com rather than ad hoc sign-in code scattered across many domains. When a visitor creates a session, the browser receives strict cookies set for the proper scope, redirect targets are checked against an allowlist, and relay messaging is limited to trusted origins. That architecture is important for HeadySystems because the page is part of a larger estate where people may enter through a community site, an investor site, an admin console, or a product site. Session continuity needs to survive those transitions without putting tokens in browser storage or asking every team to invent its own session pattern.</p><p class="fade-in">HeadyAutoContext is injected into the page because the site is treated as a participant in the ecosystem, not a static dead end. As soon as the runtime loads, the page declares its site metadata, domain identity, geometry selection, and session hooks. That context can then be carried into content injectors, auth updates, analytics events, and service calls. In practice this means that a visit to headysystems.com can be understood alongside prior navigation, role-specific actions, and downstream service requests. The page becomes part of the operational memory of the platform rather than a disconnected HTML artifact.</p><p class="fade-in">The product story is built around four recurring platform pillars: service discovery, mTLS transport, and typed failure handling across every workload, trace-first operations with correlation identifiers that travel across APIs, bees, and swarms, domain-matched routing using CSL alignment rather than manual switchboards, and deployment patterns that connect websites, services, admin surfaces, and Drupal content flows into one fabric. Those pillars are repeated across sections in different forms because they are the real connective tissue of the Heady estate. A hero statement gives the short promise. The features grid names the working pieces. The stats banner shows the scale frame. The deep-dive prose explains why the pieces belong together. The process section turns abstract ideas into action. The technology section names the supporting components. The ecosystem map places the page inside the broader estate. The use cases ground the story in lived workflows. The FAQ removes ambiguity for builders and operators who need more than slogans.</p><p class="fade-in">Operationally, HeadySystems is shaped to support tenant-aware orchestration for enterprise delivery, observable runtime health across services, proxies, and agent edges, secure access patterns for operators, builders, and external collaborators, and repeatable rollouts with mesh policies and structured diagnostics. That matters because the Heady platform is expected to do real work in real environments. A production page for this domain should help a visitor understand where their request will flow, how identity is preserved, how memory is linked, and how site actions connect to services behind the scenes. The prose intentionally uses concrete nouns such as cookies, relays, spans, webhooks, traces, vector memory, and service discovery because those details make the platform legible. The goal is not to sound futuristic. The goal is to sound implementable and consistent with the code that ships beside the page.</p><p class="fade-in">Observability is part of the story from the first render. Every request moving through the Heady system is meant to carry correlation identifiers, context enrichment, and typed error handling. That design choice shows up even on a public site like HeadySystems because the public page is a gateway into services, bees, swarms, and APIs that share the same operational contract. If a visitor signs in, opens a tool, starts an action, or navigates into another site, the system should be able to connect those steps into one coherent record. That is why the visual layer, auth layer, and service layer are discussed together instead of in isolation.</p><p class="fade-in">Content depth is deliberate here. A Heady site is required to explain itself with enough substance that a reader can understand the model without opening a separate document. That is why this page includes a long narrative, a process map, a technology interdependency frame, and FAQs with real answers rather than terse one-liners. The platform should not rely on mystery. It should rely on clarity. This approach also improves reuse because the same page can support onboarding, partner review, internal alignment, and public discovery without fragmenting the message into many disconnected notes.</p><p class="fade-in">The ecosystem map matters because HeadySystems is one node in a larger graph. A person may discover the company through HeadyFinance, join the community through HeadyConnection.com, work with nonprofit tools through HeadyConnection.org, operate services in Admin, or sign in through Auth. The links between those surfaces are not optional convenience features. They are proof that the estate is wired as one system. This page therefore makes the cross-site navigation explicit and keeps the footer tied to the same registry-driven structure used across the other properties so the visitor always has a clear route to adjacent capabilities.</p><p class="fade-in">From a deployment perspective, the page is built to live beside service packages, shared design assets, and the platform runtime. Shared CSS establishes the glass language, spacing, and typography. Shared JavaScript initializes sacred geometry, navigation, FAQ motion, counters, auth relay hooks, HeadyAutoContext, and the Bee injector. The site-specific content then rides on top of that shared layer. This separation lets the estate stay visually connected while still giving HeadySystems its own voice and motion signature. It also makes updates easier because system-wide behavior can be adjusted in one place without flattening the individuality of each site.</p><p class="fade-in">The final reason this page matters is narrative integrity. The Heady platform asks people to trust that many moving parts can act together without losing context. A page that explains its own place in the estate, names the operational signals it cares about, and links identity, context, delivery, and design into one frame helps earn that trust. For HeadySystems, the governing signals are platform coherence, trace continuity, service mesh coverage, and runtime attestation. Those signals shape the writing, the interface choices, the process map, and the runtime hooks. In other words, the page is written to behave like the platform it describes: connected, explicit, and ready for real use.</p></article>
+      <div class="deep-dive-visual" aria-hidden="true">
+        <canvas style="width:100%;height:100%;position:absolute;inset:0;" data-sacred-geometry="metatrons-cube" data-accent="#00d4aa"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+  <section id="how-it-works" class="section" aria-labelledby="hiw-heading">
+  <div class="container container-narrow">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">How It Works</p>
+      <h2 id="hiw-heading" class="section-title">The path from page load to platform action</h2>
+      <p class="section-subtitle">Each step maps visible interface behavior to the runtime hooks, identity controls, and context handoffs behind it.</p>
+    </header>
+    <div class="process-map fade-in"><div class="process-node"><span>01</span><strong>Establish identity</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>02</span><strong>Enrich context</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>03</span><strong>Trigger content motion</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>04</span><strong>Connect platform services</strong></div><span class="process-arrow" aria-hidden="true">→</span><div class="process-node"><span>05</span><strong>Carry the visitor onward</strong></div></div>
+    <div class="steps-list"><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">01</div>
+      <div>
+        <h3 class="step-title">Establish identity</h3>
+        <p class="step-desc">A visitor enters through HeadySystems and the page binds site metadata, theme state, and auth relay hooks before any deeper action begins. The result is a clean identity frame that can travel into the rest of the estate.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">02</div>
+      <div>
+        <h3 class="step-title">Enrich context</h3>
+        <p class="step-desc">HeadyAutoContext stores the domain, page role, sacred geometry selection, and session view so later actions inherit the same frame. This keeps pages, services, and agent interactions synchronized.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">03</div>
+      <div>
+        <h3 class="step-title">Trigger content motion</h3>
+        <p class="step-desc">Bee injectors and site modules can then adapt visible sections, CTAs, or helper panels using the same context object. That means dynamic behavior still remains tied to a shared system contract rather than page-local scripts.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">04</div>
+      <div>
+        <h3 class="step-title">Connect platform services</h3>
+        <p class="step-desc">When the page calls deeper services, request identifiers, domain markers, and trace hooks move with the action. This is where the website stops being brochureware and starts acting as a first-class platform surface.</p>
+      </div>
+    </div><div class="step-item fade-in">
+      <div class="step-number" aria-hidden="true">05</div>
+      <div>
+        <h3 class="step-title">Carry the visitor onward</h3>
+        <p class="step-desc">Cross-site navigation, registry-driven footers, and central auth allow the next step to happen without breaking orientation. The visitor can move to another Heady property and remain inside the same operational fabric.</p>
+      </div>
+    </div></div>
+  </div>
+</section>
+  <section id="tech-stack" class="section-sm" aria-labelledby="tech-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Technology Stack</p>
+      <h2 id="tech-heading" class="section-title">Visual interdependency diagram</h2>
+      <p class="section-subtitle">Shared assets, runtime modules, and trust controls are shown together because the Heady system is wired as one continuous surface.</p>
+    </header>
+    <div class="tech-diagram fade-in"><div class="stack-row"><p class="stack-label">Experience layer</p><div class="stack-row-grid"><div class="stack-node">Self-Healing Infrastructure</div><div class="stack-node">Buddy Orchestrator</div><div class="stack-node">Live Telemetry</div><div class="stack-node">HCFP Auto-Success</div></div></div><div class="stack-row"><p class="stack-label">Runtime layer</p><div class="stack-row-grid"><div class="stack-node">Zero Trust Security</div><div class="stack-node">Edge Mesh Network</div><div class="stack-node">Firebase Auth</div><div class="stack-node">HeadyAutoContext</div></div></div><div class="stack-row"><p class="stack-label">Trust layer</p><div class="stack-row-grid"><div class="stack-node">Bee Injector</div><div class="stack-node">OpenTelemetry</div></div></div></div>
+    <div class="tech-stack fade-in" style="justify-content:center;"><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Self-Healing Infrastructure</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Buddy Orchestrator</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Live Telemetry</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>HCFP Auto-Success</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Zero Trust Security</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Edge Mesh Network</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Firebase Auth</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>HeadyAutoContext</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>Bee Injector</span><span class="tech-badge"><span class="tech-badge-dot" aria-hidden="true"></span>OpenTelemetry</span></div>
+  </div>
+</section>
+  <section id="ecosystem" class="section" aria-labelledby="eco-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Ecosystem Map</p>
+      <h2 id="eco-heading" class="section-title">How this site connects to every other Heady site</h2>
+      <p class="section-subtitle">The registry links below keep cross-site navigation explicit, visible, and always within reach.</p>
+    </header>
+    <div class="ecosystem-grid"><a href="https://headyme.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyMe</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://heady-ai.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyAI</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyos.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyOS</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyconnection.org" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyConnection.org</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyconnection.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyConnection.com</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headyex.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadyEX</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">HeadySystems</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://admin.headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">Admin</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a><a href="https://auth.headysystems.com" class="ecosystem-node fade-in" target="_blank" rel="noopener noreferrer">
+      <span class="ecosystem-node-icon" aria-hidden="true">◈</span>
+      <span class="ecosystem-node-name">Auth</span>
+      <span class="ecosystem-node-role">Connected Heady property</span>
+    </a></div>
+  </div>
+</section>
+  <section id="use-cases" class="section" aria-labelledby="uc-heading">
+  <div class="container">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">Use Cases</p>
+      <h2 id="uc-heading" class="section-title">Real scenarios for this property</h2>
+      <p class="section-subtitle">These scenarios show how the page supports discovery, trust, and movement into deeper action.</p>
+    </header>
+    <div class="use-case-grid"><div class="use-case-card fade-in">
+      <p class="use-case-label">Operator view</p>
+      <h3 class="use-case-title">Use HeadySystems as the front door into a connected workflow</h3>
+      <p class="use-case-desc">The page explains the system model, starts identity safely, and routes the visitor toward the right next surface without dropping context or forcing a reset.</p>
+    </div><div class="use-case-card fade-in">
+      <p class="use-case-label">Partner review</p>
+      <h3 class="use-case-title">Share HeadySystems with partners who need substance before they commit</h3>
+      <p class="use-case-desc">The long-form narrative, diagrams, and FAQ give a partner enough depth to understand how identity, memory, content, and services fit together.</p>
+    </div><div class="use-case-card fade-in">
+      <p class="use-case-label">Internal alignment</p>
+      <h3 class="use-case-title">Use HeadySystems as a canonical explanation layer</h3>
+      <p class="use-case-desc">Teams can rely on the same site to explain the public story, the operating model, and the technical connection points rather than maintaining fragmented summaries.</p>
+    </div><div class="use-case-card fade-in">
+      <p class="use-case-label">Cross-site movement</p>
+      <h3 class="use-case-title">Move from HeadySystems into another Heady property without losing state</h3>
+      <p class="use-case-desc">Central auth, registry-driven links, and request enrichment allow a reader to progress from discovery into action while the system keeps its context intact.</p>
+    </div></div>
+  </div>
+</section>
+  <section id="faq" class="section" aria-labelledby="faq-heading">
+  <div class="container container-narrow">
+    <header class="section-header fade-in">
+      <p class="section-label" aria-hidden="true">FAQ</p>
+      <h2 id="faq-heading" class="section-title">Questions people ask before they trust a platform surface</h2>
+      <p class="section-subtitle">Rich answers help the page carry real explanatory weight instead of stopping at slogans.</p>
+    </header>
+    <div class="faq-list"><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What role does HeadySystems play in the Heady estate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>HeadySystems is not an isolated marketing page. It is a connected surface inside the wider Heady ecosystem. The page shares the same auth domain, context bridge, shared design system, and cross-site registry links used across the rest of the estate, which lets it participate in the same operational fabric as the deeper services.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Why is there so much long-form content on the page?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>Every Heady site is required to explain its model in enough detail that a reader can understand the system without opening a separate manual. That means the page carries narrative depth, process detail, architecture cues, and FAQ answers with enough substance to support onboarding, diligence, partner review, and internal alignment.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">How does central auth work here?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>Identity starts at auth.headysystems.com. Session material is stored in strict cookies, redirect targets are checked server-side, and state values keep flows bound to the initiating browser path. Other Heady sites receive session updates through an explicit relay pattern instead of storing bearer material in page scripts.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What does HeadyAutoContext do on a page like this?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>HeadyAutoContext turns the site into a context-aware participant in the platform. It records the page identity, domain role, session hints, and other metadata so content injectors, analytics, services, and adjacent sites can work from the same shared frame.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Why are sacred geometry canvases included on every site?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>The canvas motion gives each property a distinct identity while still signaling that the page belongs to the Heady estate. It is tied to the same shared runtime layer as the rest of the page, which means the visual system reinforces operational continuity rather than acting as decoration alone.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">How do content injectors fit into the experience?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>The HeadyBee injector lets pages receive context-shaped content blocks and updates while preserving a consistent DOM contract. This is useful for dynamic banners, helper copy, launch notes, and guided flows that need to respond to the current site and session frame.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What does this page emphasize about enterprise delivery?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>It emphasizes how HeadySystems contributes to the Heady system in working terms: how a visitor arrives, how identity is handled, how context is enriched, how services connect, and how the next step stays legible. The page is designed to turn a broad concept into an implementable operating picture.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Can this site evolve without breaking the rest of the estate?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>Yes. Shared runtime behavior lives in common packages, while the page content and accents remain domain-specific. That means the estate can evolve centrally where it makes sense, while each property can still refine its own voice, diagrams, and use cases.</p></div>
+    </div><div class="faq-item">
+      <button class="faq-question" aria-expanded="false">What makes this page production-ready rather than a mockup?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="faq-answer" role="region"><p>The page includes real section structure, shared runtime hooks, central auth integration points, registry-driven navigation, animated counters, FAQ behavior, and explicit context wiring. It is built as a deployable static surface connected to the same shared assets and patterns used across the full Heady build.</p></div>
+    </div></div>
+  </div>
+</section>
+  <section id="cta" class="section" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-section">
+      <h2 class="cta-title">Continue into the Heady ecosystem</h2>
+      <p class="cta-subtitle">Use the shared sign-in flow, keep your context intact, and move from this page into the next Heady surface without losing orientation.</p>
+      <div class="cta-actions">
+        <a href="https://auth.headysystems.com?return=https://headysystems.com" class="btn btn-primary btn-lg">Create or resume session</a>
+        <a href="#ecosystem" class="btn btn-ghost btn-lg">View connected sites</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="heady-footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" style="font-size:var(--text-lg);" aria-label="HeadySystems home">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+            <circle cx="16" cy="16" r="8" stroke="var(--color-accent)" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="3" fill="var(--color-accent)"/>
+          </svg>
+          Heady<span class="logo-accent">Systems</span>
+        </a>
+        <p class="footer-tagline">The compliance-ready, patent-protected platform for autonomous agent deployment at scale. SOC2, HIPAA, GDPR ready. 51+ patents. Founded by Eric Haywood.</p>
+        <div class="tech-stack" style="margin-top:var(--space-4);">
+          <span class="tech-badge"><span class="tech-badge-dot"></span>Auth-linked</span>
+          <span class="tech-badge"><span class="tech-badge-dot"></span>AutoContext-ready</span>
+          <span class="tech-badge"><span class="tech-badge-dot"></span>Bee-injectable</span>
+        </div>
+      </div>
+      <div class="footer-col"><p class="footer-col-title">Platform</p><ul role="list"><li><a href="#value">Overview</a></li><li><a href="#security">Security</a></li><li><a href="#roi">ROI</a></li><li><a href="#cases">Case Studies</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Products</p><ul role="list"><li><a href="https://headyme.com">HeadyMe</a></li><li><a href="https://headyos.com">HeadyOS</a></li><li><a href="https://heady-ai.com">HeadyAI</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Company</p><ul role="list"><li><a href="#">About</a></li><li><a href="https://headysystems.com">Investors</a></li><li><a href="#">Careers</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 HeadySystems Inc. · headysystems.com · <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;opacity:0.7;">Created with Perplexity Computer</a></p>
+      <nav class="footer-cross-nav" aria-label="Cross-site navigation"><a href="https://headyme.com">HeadyMe</a><a href="https://heady-ai.com">HeadyAI</a><a href="https://headyos.com">HeadyOS</a><a href="https://headyconnection.org">HeadyConnection.org</a><a href="https://headyconnection.com">HeadyConnection.com</a><a href="https://headyex.com">HeadyEX</a><a href="https://headysystems.com">HeadySystems</a><a href="https://admin.headysystems.com">Admin</a><a href="https://auth.headysystems.com">Auth</a></nav>
+    </div>
+  </div>
+</footer>
+<div class="auth-widget" id="heady-auth-widget" aria-live="polite">
+  <button class="auth-widget-btn" type="button" aria-label="Sign in to Heady">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="auth-label">Sign In</span>
+  </button>
+</div>
+<script>
+window.__HEADY_SITE_META__ = {
+  slug: "headysystems",
+  domain: "headysystems.com",
+  name: "HeadySystems",
+  accent: "#00d4aa",
+  sacredGeometry: "Metatrons Cube"
+};
+window.__HEADY_AUTH_CONFIG__ = {
+  cookieEndpoint: "https://auth.headysystems.com/api/session/start",
+  providerEndpoint: "https://auth.headysystems.com/api/provider/start",
+  relayOrigin: "https://auth.headysystems.com"
+};
+</script>
+<script defer src="/shared/js/heady-sacred-geometry.js"></script>
+<script defer src="/shared/js/heady-shared.js"></script>
+<script>
+if (window.HeadyAutoContext) window.HeadyAutoContext.init(window.__HEADY_SITE_META__);
+if (window.HeadyBeeInjector) window.HeadyBeeInjector.init({ site: "headysystems.com" });
+const authForm = document.querySelector('[data-heady-auth-form]');
+if (authForm) {
+  authForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const payload = Object.fromEntries(new FormData(authForm).entries());
+    try {
+      const response = await fetch(window.__HEADY_AUTH_CONFIG__.cookieEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+      });
+      if (response.ok) window.location.href = payload.returnUrl || 'https://headysystems.com';
+      else document.body.setAttribute('data-heady-auth-preview', 'retry-needed');
+    } catch (error) {
+      document.body.setAttribute('data-heady-auth-preview', 'offline-preview');
+    }
+  });
+  document.querySelectorAll('[data-heady-provider]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const provider = button.getAttribute('data-heady-provider');
+      const returnUrl = authForm.querySelector('input[name="returnUrl"]').value;
+      window.location.href = `${window.__HEADY_AUTH_CONFIG__.providerEndpoint}?provider=${encodeURIComponent(provider)}&return=${encodeURIComponent(returnUrl)}`;
+    });
+  });
+}
+</script>
+<section class="heady-ecosystem" style="padding: 2rem 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+  <p style="color: #aaa; font-size: 14px; margin-bottom: 1rem;">Part of the Heady Ecosystem</p>
+  <nav style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+    <a href="https://headysystems.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadySystems</a>
+    <a href="https://headyme.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyMe</a>
+    <a href="https://headyos.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyOS</a>
+    <a href="https://headyio.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyIO</a>
+    <a href="https://heady-ai.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">Heady AI</a>
+    <a href="https://headyconnection.com" style="color: #00d4ff; text-decoration: none; font-size: 13px;">HeadyConnection</a>
+  </nav>
+</section>
+
+<!-- HeadyBuddy Chat Widget -->
+<script>
+(function(){
+  var API="https://api.headysystems.com";
+  var s=document.createElement("div");s.id="heady-buddy-fab";
+  s.innerHTML='<div style="position:fixed;bottom:21px;right:21px;z-index:99999;"><button id="hb-toggle" style="width:55px;height:55px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#6366F1);border:none;cursor:pointer;box-shadow:0 4px 21px rgba(168,85,247,0.4);display:flex;align-items:center;justify-content:center;transition:transform 0.3s cubic-bezier(0.618,0,0.382,1);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button><div id="hb-panel" style="display:none;position:absolute;bottom:70px;right:0;width:360px;max-height:500px;background:#0f0f1a;border:1px solid rgba(168,85,247,0.3);border-radius:13px;box-shadow:0 8px 34px rgba(0,0,0,0.6);overflow:hidden;font-family:system-ui,-apple-system,sans-serif;"><div style="padding:13px 16px;background:linear-gradient(135deg,#A855F7,#6366F1);color:white;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;"><span style="font-size:18px;">&#x1F916;</span> HeadyBuddy<span style="margin-left:auto;font-size:11px;opacity:0.8;">AI Assistant</span></div><div id="hb-msgs" style="padding:13px;height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"><div style="background:rgba(168,85,247,0.15);color:#e2e8f0;padding:10px 13px;border-radius:13px 13px 13px 3px;font-size:13px;max-width:85%;">Hey! I'm HeadyBuddy. Ask me anything about the Heady ecosystem.</div></div><div style="padding:8px 13px 13px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;"><input id="hb-input" type="text" placeholder="Ask HeadyBuddy..." style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#f1f5f9;font-size:13px;outline:none;" /><button id="hb-send" style="background:linear-gradient(135deg,#A855F7,#6366F1);border:none;border-radius:8px;padding:8px 14px;color:white;cursor:pointer;font-size:13px;font-weight:500;">Send</button></div></div></div>';
+  document.body.appendChild(s);
+  var panel=document.getElementById("hb-panel"),msgs=document.getElementById("hb-msgs"),input=document.getElementById("hb-input");
+  document.getElementById("hb-toggle").onclick=function(){panel.style.display=panel.style.display==="none"?"block":"none";if(panel.style.display!=="none")input.focus();};
+  function addMsg(text,isUser){var d=document.createElement("div");d.style.cssText="padding:10px 13px;border-radius:13px;font-size:13px;max-width:85%;word-wrap:break-word;"+(isUser?"background:rgba(99,102,241,0.3);color:#e2e8f0;margin-left:auto;border-bottom-right-radius:3px;":"background:rgba(168,85,247,0.15);color:#e2e8f0;border-bottom-left-radius:3px;");d.textContent=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+  function send(){var q=input.value.trim();if(!q)return;addMsg(q,true);input.value="";addMsg("Thinking...",false);var last=msgs.lastChild;
+    fetch(API+"/api/buddy/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q,domain:location.hostname})}).then(function(r){return r.json();}).then(function(d){last.textContent=d.reply||d.response||d.text||"I can help with the Heady ecosystem. Try asking about products, API, or pricing.";}).catch(function(){last.textContent="Visit headybuddy.org for a full chat, or check docs at headyio.com.";});
+  }
+  document.getElementById("hb-send").onclick=send;
+  input.onkeydown=function(e){if(e.key==="Enter")send();};
+})();
+</script>
+
+</body>
+</html>

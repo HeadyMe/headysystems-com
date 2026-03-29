@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeadySystems Docs — Infrastructure Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --phi: 1.618033988749895;
+      --psi: 0.618033988749895;
+      --sp-1: 5px; --sp-2: 8px; --sp-3: 13px; --sp-4: 21px;
+      --sp-5: 34px; --sp-6: 55px; --sp-7: 89px;
+
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: rgba(255,255,255,0.03);
+      --bg-glass: rgba(255,255,255,0.05);
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898a8;
+      --border-subtle: rgba(255,255,255,0.08);
+      --accent: #00d4aa;
+      --heady-gold: #d4a017;
+      --gold-dim: rgba(212,160,23,0.12);
+
+      /* Layer 2 — Trinity Triangle: electric indigo */
+      --layer-color: #818cf8;
+      --layer-dim: rgba(129,140,248,0.10);
+
+      --sidebar-width: 260px;
+      --topnav-height: 55px;
+      --radius: 8px;
+      --radius-lg: 13px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.618;
+      min-height: 100vh;
+    }
+
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--topnav-height);
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(21px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center; gap: var(--sp-5);
+      padding: 0 var(--sp-5); z-index: 1000;
+    }
+
+    .topnav-logo {
+      display: flex; align-items: center; gap: var(--sp-2);
+      font-weight: 600; font-size: 15px;
+      color: var(--layer-color); text-decoration: none; flex-shrink: 0;
+    }
+    .topnav-logo svg { width: 28px; height: 28px; }
+
+    .topnav-domains {
+      display: flex; align-items: center; gap: var(--sp-1);
+      flex: 1; overflow-x: auto; scrollbar-width: none;
+    }
+    .topnav-domains::-webkit-scrollbar { display: none; }
+
+    .domain-link {
+      font-size: 12px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; padding: var(--sp-1) var(--sp-3);
+      border-radius: var(--radius); border: 1px solid transparent;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .domain-link:hover { color: var(--text-primary); border-color: var(--border-subtle); background: var(--bg-glass); }
+    .domain-link.active { color: var(--layer-color); border-color: rgba(129,140,248,0.3); background: var(--layer-dim); }
+
+    .topnav-badge {
+      font-size: 10px; font-weight: 600; color: var(--heady-gold);
+      background: var(--gold-dim); border: 1px solid rgba(212,160,23,0.3);
+      padding: 2px 6px; border-radius: 4px; letter-spacing: 0.05em; flex-shrink: 0;
+    }
+
+    .layout { display: flex; padding-top: var(--topnav-height); min-height: 100vh; }
+
+    .sidebar {
+      position: fixed; top: var(--topnav-height); left: 0;
+      width: var(--sidebar-width); height: calc(100vh - var(--topnav-height));
+      background: var(--bg-secondary); border-right: 1px solid var(--border-subtle);
+      overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border-subtle) transparent;
+      padding: var(--sp-5) 0 var(--sp-7); z-index: 100;
+    }
+
+    .sidebar-section { padding: var(--sp-4) var(--sp-4) var(--sp-2); }
+    .sidebar-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-secondary);
+      margin-bottom: var(--sp-2); padding: 0 var(--sp-2);
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li a {
+      display: flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-2) var(--sp-3); border-radius: var(--radius);
+      font-size: 13px; color: var(--text-secondary);
+      text-decoration: none; transition: all 0.15s; margin-bottom: 2px;
+    }
+    .sidebar-nav li a:hover { color: var(--text-primary); background: var(--bg-glass); }
+    .sidebar-nav li a.active { color: var(--layer-color); background: var(--layer-dim); }
+    .nav-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      color: var(--layer-color); opacity: 0.6; min-width: 24px;
+    }
+
+    .main {
+      margin-left: var(--sidebar-width); flex: 1;
+      padding: var(--sp-6) var(--sp-7);
+      max-width: calc(100vw - var(--sidebar-width));
+    }
+
+    .doc-hero { margin-bottom: var(--sp-7); padding-bottom: var(--sp-6); border-bottom: 1px solid var(--border-subtle); }
+    .layer-badge {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--layer-color);
+      background: var(--layer-dim); border: 1px solid rgba(129,140,248,0.3);
+      padding: var(--sp-1) var(--sp-3); border-radius: 20px; margin-bottom: var(--sp-4);
+    }
+    .doc-hero h1 {
+      font-size: 42px; font-weight: 700; line-height: 1.15; margin-bottom: var(--sp-4);
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--layer-color) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .doc-hero p { font-size: 17px; color: var(--text-secondary); max-width: 680px; line-height: 1.7; }
+    .doc-hero-meta { display: flex; align-items: center; gap: var(--sp-4); margin-top: var(--sp-5); flex-wrap: wrap; }
+    .meta-chip { font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: var(--sp-1); }
+    .meta-chip strong { color: var(--text-primary); }
+
+    .doc-section { margin-bottom: var(--sp-7); }
+    .section-heading {
+      display: flex; align-items: center; gap: var(--sp-3);
+      margin-bottom: var(--sp-5); padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+      color: var(--layer-color); background: var(--layer-dim);
+      border: 1px solid rgba(129,140,248,0.3); padding: 2px var(--sp-2); border-radius: 4px;
+    }
+    .section-heading h2 { font-size: 24px; font-weight: 600; color: var(--text-primary); }
+
+    .card-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+      gap: var(--sp-4); margin-bottom: var(--sp-5);
+    }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: var(--sp-5);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .card:hover { border-color: rgba(129,140,248,0.25); background: var(--layer-dim); }
+    .card-icon {
+      width: 34px; height: 34px; border-radius: var(--radius);
+      background: var(--layer-dim); border: 1px solid rgba(129,140,248,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--sp-3); font-size: 16px;
+    }
+    .card h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: var(--sp-2); }
+    .card p { font-size: 13px; color: var(--text-secondary); line-height: 1.618; }
+
+    .doc-table-wrap { overflow-x: auto; margin-bottom: var(--sp-5); }
+    .doc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .doc-table th {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--sp-2) var(--sp-3); text-align: left;
+    }
+    .doc-table td {
+      padding: var(--sp-3) var(--sp-3);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--text-secondary); vertical-align: top;
+    }
+    .doc-table td:first-child { color: var(--text-primary); font-weight: 500; }
+    .doc-table tr:hover td { background: var(--bg-glass); }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 500; padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .status-active { background: rgba(0,212,170,0.12); color: #00d4aa; border: 1px solid rgba(0,212,170,0.3); }
+    .status-beta   { background: rgba(212,160,23,0.12); color: var(--heady-gold); border: 1px solid rgba(212,160,23,0.3); }
+    .status-planned { background: var(--bg-glass); color: var(--text-secondary); border: 1px solid var(--border-subtle); }
+
+    .code-block {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: var(--sp-4);
+      overflow-x: auto; color: #a8e6cf; line-height: 1.7; margin-bottom: var(--sp-4);
+    }
+    .code-comment { color: var(--text-secondary); }
+    .code-key { color: var(--layer-color); }
+    .code-val { color: #ffd700; }
+    .code-str { color: #87ceeb; }
+
+    .info-box {
+      background: var(--layer-dim); border: 1px solid rgba(129,140,248,0.25);
+      border-left: 3px solid var(--layer-color); border-radius: var(--radius);
+      padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-5);
+    }
+    .info-box .info-title {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--layer-color); margin-bottom: var(--sp-2);
+    }
+    .info-box p { font-size: 13px; color: var(--text-secondary); line-height: 1.618; }
+
+    /* Pipeline stages */
+    .pipeline-wrap { margin-bottom: var(--sp-5); }
+    .pipeline-stages {
+      display: flex; flex-wrap: wrap; gap: var(--sp-2);
+    }
+    .stage-chip {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius); padding: var(--sp-2) var(--sp-3);
+      min-width: 80px; transition: all 0.15s;
+    }
+    .stage-chip:hover { border-color: rgba(129,140,248,0.3); background: var(--layer-dim); }
+    .stage-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      color: var(--layer-color); margin-bottom: 2px;
+    }
+    .stage-name { font-size: 11px; color: var(--text-secondary); text-align: center; }
+
+    /* 6-layer stack */
+    .stack-layers { display: flex; flex-direction: column; gap: var(--sp-3); margin-bottom: var(--sp-5); }
+    .stack-layer {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5);
+      display: grid; grid-template-columns: 80px 1fr auto; gap: var(--sp-4);
+      align-items: center;
+    }
+    .layer-n {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--layer-color); font-weight: 600;
+    }
+    .layer-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .layer-info p { font-size: 12px; color: var(--text-secondary); }
+    .layer-tech { font-size: 11px; color: var(--text-secondary); text-align: right; white-space: nowrap; }
+
+    .doc-footer { margin-top: var(--sp-7); padding-top: var(--sp-5); border-top: 1px solid var(--border-subtle); }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+      gap: var(--sp-5); margin-bottom: var(--sp-5);
+    }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-secondary); margin-bottom: var(--sp-3);
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: var(--sp-2); }
+    .footer-col ul li a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    .footer-col ul li a:hover { color: var(--layer-color); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--text-secondary); flex-wrap: wrap; gap: var(--sp-3);
+    }
+    .footer-phi { font-family: 'JetBrains Mono', monospace; color: var(--layer-color); opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .main { margin-left: 0; padding: var(--sp-4); max-width: 100vw; }
+      .doc-hero h1 { font-size: 28px; }
+      .stack-layer { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="https://headysystems.com" class="topnav-logo">
+      <svg viewBox="0 0 28 28" fill="none" aria-label="HeadySystems logo">
+        <!-- Trinity Triangle: Layer 2 -->
+        <circle cx="14" cy="14" r="12" stroke="#818cf8" stroke-width="1.5" opacity="0.3"/>
+        <polygon points="14,4 23,20 5,20" stroke="#818cf8" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <polygon points="14,9 19.5,19 8.5,19" stroke="#818cf8" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <circle cx="14" cy="14" r="2.5" fill="#818cf8"/>
+      </svg>
+      HeadySystems
+    </a>
+
+    <div class="topnav-domains">
+      <a href="https://headyme.com/docs" class="domain-link">HeadyMe</a>
+      <a href="https://headysystems.com/docs" class="domain-link active">HeadySystems</a>
+      <a href="https://headyconnection.org/docs" class="domain-link">HeadyConnection</a>
+      <a href="https://headybuddy.org/docs" class="domain-link">HeadyBuddy</a>
+      <a href="https://headymcp.com/docs" class="domain-link">HeadyMCP</a>
+      <a href="https://headyapi.com/docs" class="domain-link">HeadyAPI</a>
+    </div>
+
+    <span class="topnav-badge">Layer 2 · Trinity Triangle</span>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Documentation</div>
+        <ul class="sidebar-nav">
+          <li><a href="#overview" class="active"><span class="nav-num">00</span>Overview</a></li>
+          <li><a href="#architecture"><span class="nav-num">01</span>Architecture</a></li>
+          <li><a href="#infrastructure"><span class="nav-num">02</span>Infrastructure</a></li>
+          <li><a href="#pipelines"><span class="nav-num">03</span>Pipelines & Workflows</a></li>
+          <li><a href="#security"><span class="nav-num">04</span>Security</a></li>
+          <li><a href="#services"><span class="nav-num">05</span>Services Manual</a></li>
+          <li><a href="#deployment"><span class="nav-num">06</span>Deployment</a></li>
+          <li><a href="#competitive"><span class="nav-num">07</span>Competitive Analysis</a></li>
+          <li><a href="#reference"><span class="nav-num">08</span>Reference</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Ecosystem</div>
+        <ul class="sidebar-nav">
+          <li><a href="https://headyme.com/docs"><span class="nav-num">↗</span>HeadyMe</a></li>
+          <li><a href="https://headyconnection.org/docs"><span class="nav-num">↗</span>HeadyConnection</a></li>
+          <li><a href="https://headymcp.com/docs"><span class="nav-num">↗</span>HeadyMCP</a></li>
+          <li><a href="https://headybuddy.org/docs"><span class="nav-num">↗</span>HeadyBuddy</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <div class="doc-hero" id="overview">
+        <div class="layer-badge">▲ Layer 2 · Trinity Triangle · The Infrastructure Engine</div>
+        <h1>HeadySystems Documentation</h1>
+        <p>
+          HeadySystems is the commercial infrastructure backbone of the Heady ecosystem —
+          a Liquid Latent OS built on Sacred Geometry, orchestrating 17 swarms, 89 agent types,
+          and a 22-stage cognitive pipeline across a φ-derived cloud architecture.
+        </p>
+        <div class="doc-hero-meta">
+          <span class="meta-chip">Version <strong>4.0.0</strong></span>
+          <span class="meta-chip">Domain <strong>headysystems.com</strong></span>
+          <span class="meta-chip">Layer <strong>2 of 9</strong></span>
+          <span class="meta-chip">Swarms <strong>17</strong></span>
+          <span class="meta-chip">Agents <strong>89</strong></span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-title">The Liquid Latent OS</div>
+        <p>
+          Unlike traditional microservices that run perpetually consuming overhead, HeadySystems operates
+          a Continuous Latent Architecture (CLA). Services exist as fluid mathematical states —
+          Liquid Nodes instantiate on demand under inference pressure and dissolve back into latency when idle,
+          with state persisted to Shadow Memory (Redis).
+        </p>
+      </div>
+
+      <!-- 01 Architecture -->
+      <div class="doc-section" id="architecture">
+        <div class="section-heading">
+          <span class="section-num">01</span>
+          <h2>Architecture Overview</h2>
+        </div>
+
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:var(--sp-5);">
+          The 6-layer Sacred Geometry stack translates cloud infrastructure into an
+          intelligently self-organizing system governed by φ-derived constants throughout.
+        </p>
+
+        <div class="stack-layers">
+          <div class="stack-layer">
+            <div class="layer-n">Layer 6</div>
+            <div class="layer-info"><h4>Edge Intelligence</h4><p>Cloudflare Workers — X-Heady-Site routing, Ed25519 verification, DDoS mitigation</p></div>
+            <div class="layer-tech">Cloudflare</div>
+          </div>
+          <div class="stack-layer">
+            <div class="layer-n">Layer 5</div>
+            <div class="layer-info"><h4>Compute Mesh</h4><p>GCP Cloud Run (us-central1) — Universal Docker container, auto-scaling 0→∞ via traffic</p></div>
+            <div class="layer-tech">Cloud Run</div>
+          </div>
+          <div class="stack-layer">
+            <div class="layer-n">Layer 4</div>
+            <div class="layer-info"><h4>API Gateway</h4><p>heady-manager (port 3300) — 100+ endpoints, JWT auth, rate limiting (34 req/s, fib₉)</p></div>
+            <div class="layer-tech">Node.js / Express</div>
+          </div>
+          <div class="stack-layer">
+            <div class="layer-n">Layer 3</div>
+            <div class="layer-info"><h4>Orchestration</h4><p>heady-conductor — 17 swarms, 89 bee types, HCFP pipeline variants (FAST/STANDARD/FULL)</p></div>
+            <div class="layer-tech">heady-conductor</div>
+          </div>
+          <div class="stack-layer">
+            <div class="layer-n">Layer 2</div>
+            <div class="layer-info"><h4>Vector Memory</h4><p>Qdrant / Redis — 384D pgvector embeddings, VSA codebook, Shadow Memory persistence</p></div>
+            <div class="layer-tech">Neon + Upstash</div>
+          </div>
+          <div class="stack-layer">
+            <div class="layer-n">Layer 1</div>
+            <div class="layer-info"><h4>Persistence</h4><p>Neon PostgreSQL — user profiles, audit logs, SHA-256 tamper-evident chains</p></div>
+            <div class="layer-tech">Neon / PostgreSQL</div>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🧮</div>
+            <h3>Continuous Semantic Logic</h3>
+            <p>Boolean True/False replaced with φ-derived thresholds: SUPPRESS(0.236) → INCLUDE(0.382) → BOOST(0.618) → INJECT(0.718) → HIGH(0.882) → CRITICAL(0.927).</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🌊</div>
+            <h3>Liquid Node Lifecycle</h3>
+            <p>Nodes transition: Latent → Active → Degraded → Standby → Latent. Heartbeat interval: TIMING.LONG = φ⁸ × 1000 ≈ 46,979ms.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>Circuit Breakers</h3>
+            <p>Three-state fault handling (Closed/Open/Half-Open) with φ-backoff retry intervals. No arbitrary timeout magic numbers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Infrastructure -->
+      <div class="doc-section" id="infrastructure">
+        <div class="section-heading">
+          <span class="section-num">02</span>
+          <h2>Cloud Infrastructure</h2>
+        </div>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead><tr><th>Component</th><th>Service</th><th>Detail</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>GCP Project</td>
+                <td>Google Cloud Platform</td>
+                <td>gen-lang-client-0920560496 · us-central1</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Container Registry</td>
+                <td>Artifact Registry</td>
+                <td>us-east1-docker.pkg.dev/…/cloud-run-source-deploy/</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Universal Image</td>
+                <td>Docker</td>
+                <td>Dockerfile.universal — single image, multi-domain routing</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td>Neon PostgreSQL</td>
+                <td>Serverless Postgres + pgvector (384D embeddings)</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Cache / Sessions</td>
+                <td>Upstash Redis</td>
+                <td>Shadow memory, JWT allowlist, notification queue</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Edge</td>
+                <td>Cloudflare</td>
+                <td>Workers, DNS, DDoS, TLS termination</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Secrets</td>
+                <td>GCP Secret Manager</td>
+                <td>1Password → HeadyVault → GCP SM → .env fallback chain</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>Vector Search</td>
+                <td>Qdrant</td>
+                <td>High-dimensional VSA codebook, cosine similarity</td>
+                <td><span class="status-badge status-beta">◐ Beta</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 03 Pipelines -->
+      <div class="doc-section" id="pipelines">
+        <div class="section-heading">
+          <span class="section-num">03</span>
+          <h2>Pipelines & Workflows</h2>
+        </div>
+
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:var(--sp-4);">
+          The Heady Continuous Fusion Protocol (HCFP) routes every cognitive task through one of five
+          pipeline variants. Stage counts are Fibonacci numbers: 8, 13, 15, 21, 22.
+        </p>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead><tr><th>Variant</th><th>Stages</th><th>Target Latency</th><th>Use Case</th></tr></thead>
+            <tbody>
+              <tr><td>FAST</td><td>8 (fib₆)</td><td>&lt; 5s</td><td>Instant chat, simple queries, HeadyBuddy widget</td></tr>
+              <tr><td>LEARNING</td><td>13 (fib₇)</td><td>&lt; 12s</td><td>Pattern distillation, VSA codebook optimization</td></tr>
+              <tr><td>STANDARD</td><td>13 (fib₇)</td><td>&lt; 12s</td><td>Everyday generative tasks, content creation</td></tr>
+              <tr><td>ARENA</td><td>15</td><td>&lt; 30s</td><td>Multi-model code competition, Battle Arena</td></tr>
+              <tr><td>FULL</td><td>22 (fib₈+)</td><td>&lt; 55s</td><td>Complete cognitive process, deep analysis</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pipeline-wrap">
+          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:var(--sp-3);">FULL Pipeline (22 stages) — HCFullPipeline</p>
+          <div class="pipeline-stages">
+            <div class="stage-chip"><span class="stage-num">01</span><span class="stage-name">Ingest</span></div>
+            <div class="stage-chip"><span class="stage-num">02</span><span class="stage-name">Normalize</span></div>
+            <div class="stage-chip"><span class="stage-num">03</span><span class="stage-name">Auth Gate</span></div>
+            <div class="stage-chip"><span class="stage-num">04</span><span class="stage-name">CSL Score</span></div>
+            <div class="stage-chip"><span class="stage-num">05</span><span class="stage-name">Memory Lookup</span></div>
+            <div class="stage-chip"><span class="stage-num">06</span><span class="stage-name">Vector Search</span></div>
+            <div class="stage-chip"><span class="stage-num">07</span><span class="stage-name">Context Build</span></div>
+            <div class="stage-chip"><span class="stage-num">08</span><span class="stage-name">Route Select</span></div>
+            <div class="stage-chip"><span class="stage-num">09</span><span class="stage-name">Tool Bind</span></div>
+            <div class="stage-chip"><span class="stage-num">10</span><span class="stage-name">LLM Invoke</span></div>
+            <div class="stage-chip"><span class="stage-num">11</span><span class="stage-name">Confidence</span></div>
+            <div class="stage-chip"><span class="stage-num">12</span><span class="stage-name">Fallback</span></div>
+            <div class="stage-chip"><span class="stage-num">13</span><span class="stage-name">Synthesis</span></div>
+            <div class="stage-chip"><span class="stage-num">14</span><span class="stage-name">Eval</span></div>
+            <div class="stage-chip"><span class="stage-num">15</span><span class="stage-name">Safety</span></div>
+            <div class="stage-chip"><span class="stage-num">16</span><span class="stage-name">Format</span></div>
+            <div class="stage-chip"><span class="stage-num">17</span><span class="stage-name">Enrich</span></div>
+            <div class="stage-chip"><span class="stage-num">18</span><span class="stage-name">Memory Write</span></div>
+            <div class="stage-chip"><span class="stage-num">19</span><span class="stage-name">Audit Log</span></div>
+            <div class="stage-chip"><span class="stage-num">20</span><span class="stage-name">Telemetry</span></div>
+            <div class="stage-chip"><span class="stage-num">21</span><span class="stage-name">Deliver</span></div>
+            <div class="stage-chip"><span class="stage-num">22</span><span class="stage-name">Ascension</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Security -->
+      <div class="doc-section" id="security">
+        <div class="section-heading">
+          <span class="section-num">04</span>
+          <h2>Security Architecture</h2>
+        </div>
+
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:var(--sp-5);">
+          heady-guard implements an 8-layer Zero-Trust sandbox. Every MCP tool invocation requires
+          the calling agent's Capability Bitmask to align with the required RBAC threshold via JWT validation.
+        </p>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🛡</div>
+            <h3>Zero-Trust Sandbox</h3>
+            <p>8-layer security perimeter. No implicit trust between services. Every request is authenticated, authorized, and rate-limited independently.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔗</div>
+            <h3>Tamper-Evident Logs</h3>
+            <p>SHA-256 audit chains ensure every action is immutably recorded. SOC2 Trust Service Criteria compliant, bridging community and enterprise trust.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔑</div>
+            <h3>Credential Bridge</h3>
+            <p>1Password → HeadyVault → GCP Secret Manager → .env fallback. Zero plaintext environment variables in production.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>CSL Confidence Gates</h3>
+            <p>Sentinel agents guard injection attacks via continuous probability gates. Requests below SUPPRESS (0.236) are dropped before reaching the pipeline.</p>
+          </div>
+        </div>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead><tr><th>CSL Gate</th><th>Threshold</th><th>φ Derivation</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>SUPPRESS</td><td>0.236</td><td>ψ² / φ equivalent</td><td>Drop request, log entropy event</td></tr>
+              <tr><td>INCLUDE</td><td>0.382</td><td>ψ² = 0.382</td><td>Minimum viable signal — preserve</td></tr>
+              <tr><td>BOOST</td><td>0.618</td><td>ψ = 1/φ</td><td>Strong signal — prioritize routing</td></tr>
+              <tr><td>INJECT</td><td>0.718</td><td>ψ + ψ³</td><td>Actionable high-confidence loop entry</td></tr>
+              <tr><td>HIGH</td><td>0.882</td><td>φ / (φ+1)</td><td>Execution lock — critical path only</td></tr>
+              <tr><td>CRITICAL</td><td>0.927</td><td>Near φ / (1+φ²)</td><td>System-level decision authority</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 05 Services Manual -->
+      <div class="doc-section" id="services">
+        <div class="section-heading">
+          <span class="section-num">05</span>
+          <h2>Services Manual</h2>
+        </div>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead><tr><th>Service</th><th>Port</th><th>Purpose</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>heady-manager</td><td>3300</td>
+                <td>API Gateway — 100+ endpoints, JWT validation, rate limiting</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>heady-conductor</td><td>—</td>
+                <td>Agent orchestration, swarm coordination, HCFP pipeline routing</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>heady-guard</td><td>—</td>
+                <td>Zero-Trust sandbox, 8-layer security perimeter, RBAC enforcement</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>heady-memory</td><td>—</td>
+                <td>Vector memory (Qdrant/Redis), 384D embeddings, VSA codebook</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>heady-buddy</td><td>—</td>
+                <td>Chat widget, conversational AI, multi-platform adapter</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>MCP Server</td><td>3310</td>
+                <td>47 modular tools for agent use via Model Context Protocol</td>
+                <td><span class="status-badge status-active">● Active</span></td>
+              </tr>
+              <tr>
+                <td>heady-eval</td><td>—</td>
+                <td>Auto-Tuner — dynamic concurrency adjustment based on compute pressure</td>
+                <td><span class="status-badge status-beta">◐ Beta</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 06 Deployment -->
+      <div class="doc-section" id="deployment">
+        <div class="section-heading">
+          <span class="section-num">06</span>
+          <h2>Deployment</h2>
+        </div>
+
+        <div class="code-block"><span class="code-comment"># Heady Universal Deploy — Cloud Run</span>
+<span class="code-comment"># Build universal Docker image</span>
+docker build -f Dockerfile.universal \
+  -t us-east1-docker.pkg.dev/<span class="code-val">PROJECT_ID</span>/cloud-run-source-deploy/<span class="code-val">heady</span> .
+
+<span class="code-comment"># Push to Artifact Registry</span>
+docker push us-east1-docker.pkg.dev/<span class="code-val">PROJECT_ID</span>/cloud-run-source-deploy/<span class="code-val">heady</span>
+
+<span class="code-comment"># Deploy to Cloud Run (us-central1)</span>
+gcloud run deploy heady \
+  --image us-east1-docker.pkg.dev/<span class="code-val">PROJECT_ID</span>/cloud-run-source-deploy/<span class="code-val">heady</span> \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-env-vars X_HEADY_SITE=headysystems</div>
+
+        <div class="info-box">
+          <div class="info-title">Auto-Commit Engine</div>
+          <p>
+            The <code style="font-family:monospace;font-size:12px">src/runtime/auto-commit-deploy.js</code> persistent deployment cycle
+            runs as a background service, scheduling Git commits and Cloud Run promotions via GitHub Actions.
+            The Infinite Recursive Ascension Loop (<code style="font-family:monospace;font-size:12px">auto-success-engine.ts</code>)
+            continuously audits and self-optimizes deployment artifacts.
+          </p>
+        </div>
+      </div>
+
+      <!-- 07 Competitive -->
+      <div class="doc-section" id="competitive">
+        <div class="section-heading">
+          <span class="section-num">07</span>
+          <h2>Competitive Positioning</h2>
+        </div>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead><tr><th>Capability</th><th>HeadySystems</th><th>Traditional Platforms</th></tr></thead>
+            <tbody>
+              <tr><td>Architecture Paradigm</td><td>Liquid Latent OS — probabilistic, self-organizing</td><td>Rigid microservices, boolean state machines</td></tr>
+              <tr><td>Scaling Logic</td><td>Fibonacci-derived (2→3→5→8→13→21…)</td><td>Arbitrary numeric thresholds (e.g., "10 replicas")</td></tr>
+              <tr><td>Timeout Strategy</td><td>φ-derived: 1618ms → 2618ms → 4236ms → 6854ms</td><td>Hard-coded "3s", "10s", "30s" values</td></tr>
+              <tr><td>Multi-Provider AI</td><td>Groq → Gemini → Claude → OpenAI fallback chain</td><td>Single provider lock-in</td></tr>
+              <tr><td>Agent Architecture</td><td>17 swarms, 89 bee types, VSA shadow memory</td><td>Monolithic AI endpoints</td></tr>
+              <tr><td>Memory Model</td><td>Vector Symbolic Architecture (10,000+ dimensions)</td><td>Stateless / session-scoped context only</td></tr>
+              <tr><td>Mission Alignment</td><td>501(c)(3) nonprofit parent — AI for social good</td><td>Pure commercial entities</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 08 Reference -->
+      <div class="doc-section" id="reference">
+        <div class="section-heading">
+          <span class="section-num">08</span>
+          <h2>Reference</h2>
+        </div>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead><tr><th>Constant</th><th>Value</th><th>Application</th></tr></thead>
+            <tbody>
+              <tr><td>φ (Phi)</td><td>1.618033988749895</td><td>Coverage tiers, performance budgets, UI spacing</td></tr>
+              <tr><td>ψ (Psi)</td><td>0.618033988749895</td><td>CSL BOOST gate, JWT refresh ratio</td></tr>
+              <tr><td>ψ²</td><td>0.382</td><td>CSL INCLUDE gate, minimum signal threshold</td></tr>
+              <tr><td>TIMING.FAST</td><td>φ³ × 1000 ≈ 4,236ms</td><td>MCP tool reads, quick cognitive checks</td></tr>
+              <tr><td>TIMING.NORMAL</td><td>φ⁵ × 1000 ≈ 11,090ms</td><td>Standard LLM inference timeout</td></tr>
+              <tr><td>TIMING.LONG</td><td>φ⁸ × 1000 ≈ 46,979ms</td><td>Deep scaffolding, heartbeat intervals</td></tr>
+              <tr><td>User burst rate</td><td>34 req/s (fib₉)</td><td>Per-user API rate limit</td></tr>
+              <tr><td>Global mesh limit</td><td>144 req/s (fib₁₂)</td><td>Cloudflare proxy global cap</td></tr>
+              <tr><td>Cache max entries</td><td>987 (fib₁₆)</td><td>Active Redis cache size limit</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer class="doc-footer">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>HeadySystems</h4>
+            <ul>
+              <li><a href="https://headysystems.com">Platform</a></li>
+              <li><a href="https://headysystems.com/docs">Documentation</a></li>
+              <li><a href="https://headysystems.com/status">System Status</a></li>
+              <li><a href="https://headysystems.com/compliance">Compliance</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Ecosystem</h4>
+            <ul>
+              <li><a href="https://headyme.com">HeadyMe</a></li>
+              <li><a href="https://headyconnection.org">HeadyConnection</a></li>
+              <li><a href="https://headymcp.com">HeadyMCP</a></li>
+              <li><a href="https://headybuddy.org">HeadyBuddy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Developer</h4>
+            <ul>
+              <li><a href="https://headyapi.com/docs">API Reference</a></li>
+              <li><a href="https://github.com/HeadyMe/Heady-Main">GitHub</a></li>
+              <li><a href="https://headysystems.com/changelog">Changelog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="https://headyconnection.org/terms">Terms</a></li>
+              <li><a href="https://headyconnection.org/privacy">Privacy</a></li>
+              <li><a href="https://headyconnection.org/security">Security</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2025 HeadySystems LLC — A wholly-owned subsidiary of HeadyConnection Inc. (501(c)(3))</span>
+          <span class="footer-phi">φ = 1.618033988749895 · Layer 2 · Trinity Triangle</span>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
+    const sections = document.querySelectorAll('[id]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting)
+          navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) window.scrollTo({ top: t.offsetTop - 76, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

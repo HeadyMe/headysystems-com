@@ -8,7 +8,7 @@
 
   /* ───────────────────────── Configuration ───────────────────────── */
 
-  var API_BASE = (window.HEADY_API || 'https://api.headysystems.com').replace(/\/+$/, '');
+  var API_BASE = (window.HEADY_API || 'https://manager.headysystems.com').replace(/\/+$/, '');
   var AUTH_BASE = (window.HEADY_AUTH || 'https://auth.headysystems.com').replace(/\/+$/, '');
   var FIREBASE_CONFIG = {
     apiKey: window.HEADY_FIREBASE_API_KEY || '',
@@ -144,7 +144,7 @@
       .slice(-MAX_HISTORY)
       .map(function (m) { return { role: m.role, content: m.text }; });
 
-    fetch(API_BASE + '/api/brain/chat', {
+    fetch(API_BASE + '/api/buddy/chat', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

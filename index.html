@@ -480,21 +480,128 @@ if (authForm) {
 </section>
 
 <!-- HeadyBuddy Chat Widget -->
-<script>
-(function(){
-  var API="https://manager.headysystems.com";
-  var s=document.createElement("div");s.id="heady-buddy-fab";
-  s.innerHTML='<div style="position:fixed;bottom:21px;right:21px;z-index:99999;"><button id="hb-toggle" style="width:55px;height:55px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#6366F1);border:none;cursor:pointer;box-shadow:0 4px 21px rgba(168,85,247,0.4);display:flex;align-items:center;justify-content:center;transition:transform 0.3s cubic-bezier(0.618,0,0.382,1);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button><div id="hb-panel" style="display:none;position:absolute;bottom:70px;right:0;width:360px;max-height:500px;background:#0f0f1a;border:1px solid rgba(168,85,247,0.3);border-radius:13px;box-shadow:0 8px 34px rgba(0,0,0,0.6);overflow:hidden;font-family:system-ui,-apple-system,sans-serif;"><div style="padding:13px 16px;background:linear-gradient(135deg,#A855F7,#6366F1);color:white;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;"><span style="font-size:18px;">&#x1F916;</span> HeadyBuddy<span style="margin-left:auto;font-size:11px;opacity:0.8;">AI Assistant</span></div><div id="hb-msgs" style="padding:13px;height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"><div style="background:rgba(168,85,247,0.15);color:#e2e8f0;padding:10px 13px;border-radius:13px 13px 13px 3px;font-size:13px;max-width:85%;">Hey! I'm HeadyBuddy. Ask me anything about the Heady ecosystem.</div></div><div style="padding:8px 13px 13px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;"><input id="hb-input" type="text" placeholder="Ask HeadyBuddy..." style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#f1f5f9;font-size:13px;outline:none;" /><button id="hb-send" style="background:linear-gradient(135deg,#A855F7,#6366F1);border:none;border-radius:8px;padding:8px 14px;color:white;cursor:pointer;font-size:13px;font-weight:500;">Send</button></div></div></div>';
-  document.body.appendChild(s);
-  var panel=document.getElementById("hb-panel"),msgs=document.getElementById("hb-msgs"),input=document.getElementById("hb-input");
-  document.getElementById("hb-toggle").onclick=function(){panel.style.display=panel.style.display==="none"?"block":"none";if(panel.style.display!=="none")input.focus();};
-  function addMsg(text,isUser){var d=document.createElement("div");d.style.cssText="padding:10px 13px;border-radius:13px;font-size:13px;max-width:85%;word-wrap:break-word;"+(isUser?"background:rgba(99,102,241,0.3);color:#e2e8f0;margin-left:auto;border-bottom-right-radius:3px;":"background:rgba(168,85,247,0.15);color:#e2e8f0;border-bottom-left-radius:3px;");d.textContent=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
-  function send(){var q=input.value.trim();if(!q)return;addMsg(q,true);input.value="";addMsg("Thinking...",false);var last=msgs.lastChild;
-    fetch(API+"/api/buddy/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q,domain:location.hostname})}).then(function(r){return r.json();}).then(function(d){last.textContent=d.reply||d.response||d.text||"I can help with the Heady ecosystem. Try asking about products, API, or pricing.";}).catch(function(){last.textContent="Visit headybuddy.org for a full chat, or check docs at headyio.com.";});
+<!-- FIX: Replaced inline onmouseover/onmouseout event handlers (SyntaxError: Unexpected identifier 'scale')
+     with CSS :hover pseudo-class transitions. Inline JS event handlers in innerHTML strings cause
+     SyntaxError in strict/minified contexts and violate CSP. Sentry ref: buddy-fab-syntax-error.
+     See: https://github.com/HeadyMe/headysystems-com/pull/[PR] -->
+<style>
+  /* HeadyBuddy FAB hover — CSS transition replaces removed onmouseover/onmouseout inline handlers */
+  #hb-toggle {
+    transition: transform 0.3s cubic-bezier(0.618, 0, 0.382, 1),
+                box-shadow 0.3s ease;
   }
-  document.getElementById("hb-send").onclick=send;
-  input.onkeydown=function(e){if(e.key==="Enter")send();};
-})();
+  #hb-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(168, 85, 247, 0.6);
+  }
+  #hb-toggle:active {
+    transform: scale(0.95);
+  }
+</style>
+<script>
+(function () {
+  'use strict';
+  // HeadyBuddy Floating Action Button
+  // Fix: Removed onmouseover="this.style.transform='scale(1.08)'" inline handlers
+  // that caused SyntaxError: Unexpected identifier 'scale' in production.
+  // Hover effects are now handled via CSS :hover above (CSP-safe, no inline JS).
+
+  var API = 'https://manager.headysystems.com';
+
+  // Build FAB container using DOM APIs — no inline event handlers
+  var wrapper = document.createElement('div');
+  wrapper.style.cssText = 'position:fixed;bottom:21px;right:21px;z-index:99999;';
+
+  var btn = document.createElement('button');
+  btn.id = 'hb-toggle';
+  btn.setAttribute('aria-label', 'Open HeadyBuddy chat');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.style.cssText = [
+    'width:55px', 'height:55px', 'border-radius:50%',
+    'background:linear-gradient(135deg,#A855F7,#6366F1)',
+    'border:none', 'cursor:pointer',
+    'box-shadow:0 4px 21px rgba(168,85,247,0.4)',
+    'display:flex', 'align-items:center', 'justify-content:center'
+  ].join(';');
+  btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+
+  var panel = document.createElement('div');
+  panel.id = 'hb-panel';
+  panel.style.cssText = [
+    'display:none', 'position:absolute', 'bottom:70px', 'right:0',
+    'width:360px', 'max-height:500px', 'background:#0f0f1a',
+    'border:1px solid rgba(168,85,247,0.3)', 'border-radius:13px',
+    'box-shadow:0 8px 34px rgba(0,0,0,0.6)', 'overflow:hidden',
+    'font-family:system-ui,-apple-system,sans-serif'
+  ].join(';');
+  panel.innerHTML = [
+    '<div style="padding:13px 16px;background:linear-gradient(135deg,#A855F7,#6366F1);color:white;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;">',
+      '<span style="font-size:18px;">&#x1F916;</span> HeadyBuddy',
+      '<span style="margin-left:auto;font-size:11px;opacity:0.8;">AI Assistant</span>',
+    '</div>',
+    '<div id="hb-msgs" style="padding:13px;height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">',
+      '<div style="background:rgba(168,85,247,0.15);color:#e2e8f0;padding:10px 13px;border-radius:13px 13px 13px 3px;font-size:13px;max-width:85%;">',
+        'Hey! I\'m HeadyBuddy. Ask me anything about the Heady ecosystem.',
+      '</div>',
+    '</div>',
+    '<div style="padding:8px 13px 13px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;">',
+      '<input id="hb-input" type="text" placeholder="Ask HeadyBuddy..." style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#f1f5f9;font-size:13px;outline:none;" />',
+      '<button id="hb-send" style="background:linear-gradient(135deg,#A855F7,#6366F1);border:none;border-radius:8px;padding:8px 14px;color:white;cursor:pointer;font-size:13px;font-weight:500;">Send</button>',
+    '</div>'
+  ].join('');
+
+  wrapper.appendChild(btn);
+  wrapper.appendChild(panel);
+  document.body.appendChild(wrapper);
+
+  var msgs = document.getElementById('hb-msgs');
+  var input = document.getElementById('hb-input');
+
+  // Toggle panel — addEventListener replaces .onclick assignment
+  btn.addEventListener('click', function () {
+    var isOpen = panel.style.display !== 'none';
+    panel.style.display = isOpen ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    if (!isOpen) { input.focus(); }
+  });
+
+  function addMsg(text, isUser) {
+    var d = document.createElement('div');
+    d.style.cssText = 'padding:10px 13px;border-radius:13px;font-size:13px;max-width:85%;word-wrap:break-word;' +
+      (isUser
+        ? 'background:rgba(99,102,241,0.3);color:#e2e8f0;margin-left:auto;border-bottom-right-radius:3px;'
+        : 'background:rgba(168,85,247,0.15);color:#e2e8f0;border-bottom-left-radius:3px;');
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function send() {
+    var q = input.value.trim();
+    if (!q) { return; }
+    addMsg(q, true);
+    input.value = '';
+    addMsg('Thinking\u2026', false);
+    var last = msgs.lastChild;
+    fetch(API + '/api/buddy/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: q, domain: location.hostname })
+    }).then(function (r) {
+      return r.json();
+    }).then(function (data) {
+      last.textContent = data.reply || data.response || data.text ||
+        'I can help with the Heady ecosystem. Try asking about products, API, or pricing.';
+    }).catch(function () {
+      last.textContent = 'Visit headybuddy.org for a full chat, or check docs at headyio.com.';
+    });
+  }
+
+  document.getElementById('hb-send').addEventListener('click', send);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { send(); }
+  });
+}());
 </script>
 
 </body>

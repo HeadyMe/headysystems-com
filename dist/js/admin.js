@@ -3,6 +3,7 @@
  * PROPRIETARY AND CONFIDENTIAL.
  * Unauthorized copying, modification, or distribution is strictly prohibited.
  */
+// WARNING: Firebase config should be injected at build time from environment variables
 /**
  * ═══ Heady Admin — Command Center JS ═══
  * Firebase Auth + HeadyBuddy Chat + Voice + Live Dashboard
@@ -15,7 +16,7 @@ const EDGE_API = 'https://heady-edge-gateway.emailheadyconnection.workers.dev';
 
 // ── Firebase Config ──
 const firebaseConfig = {
-    apiKey: "AIzaSyCbMSgOFqxZlINbQ5i-UZLM3hNjsRZxE-E",
+    apiKey: (function(){ console.warn('Firebase apiKey is not set — inject via build-time environment variables'); return ""; })(),
     authDomain: "headyweb-d28e1.firebaseapp.com",
     projectId: "headyweb-d28e1",
     storageBucket: "headyweb-d28e1.firebasestorage.app",

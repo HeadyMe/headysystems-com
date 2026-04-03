@@ -2,7 +2,7 @@ FROM node:22-alpine AS production
 RUN addgroup -g 1001 heady && adduser -u 1001 -G heady -s /bin/sh -D heady
 WORKDIR /app
 COPY package.json ./
-RUN npm install --omit=dev 2>/dev/null; true
+RUN npm install --omit=dev
 COPY server.js serve.json ./
 COPY dist/ ./dist/
 ENV NODE_ENV=production
